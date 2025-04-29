@@ -1,12 +1,12 @@
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 from aiogram.types import Message
-from aiogram.utils import executor
-import aiohttp
+import asyncio
 
-API_TOKEN = "YOUR_BOT_TOKEN"
+bot = Bot(token="6411528429:AAEeCr4bYfV3GAK-zXV0O3w90CzOCFcqDnU")
+dp = Dispatcher()
 
-bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
+async def main():
+    await dp.start_polling(bot)
 
 # Здесь список зарегистрированных ID (в идеале хранить в БД)
 registered_traders = set()
@@ -32,4 +32,5 @@ async def mock_postback(message: Message):
     await message.answer(f"🛰 Trader ID {trader_id} зарегистрирован (тестово добавлен).")
 
 if __name__ == "__main__":
-    executor.start_polling(dp)
+    asyncio.run(main())
+
